@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -27,10 +26,7 @@ public class TweetService {
   public Page<Tweet> findAll(int page, int size) {
     PageRequest pageRequest = PageRequest.of(page, size);
 
-    return new PageImpl<>(
-        repository.findAll(),
-        pageRequest,
-        size);
+    return repository.findAll(pageRequest);
   }
 
   public Tweet insertTweet(TweetDTO req, String userName) {
@@ -44,7 +40,7 @@ public class TweetService {
     } catch (RuntimeException e) {
       throw new ResourceNotFoundException("Não foi possível encontrar o usuário " + userName);
     }
-  }     
+  }
 
   public List<Tweet> getAllUserTweets(String userName) {
     try {
