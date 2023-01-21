@@ -17,17 +17,27 @@ import lombok.Data;
 @Table(name = "TB_TWEET")
 public class Tweet {
 
-    public Tweet(TweetDTO tweet) {
-        this.tweet = tweet.tweet();
-    }
+	public Tweet() {
+		super();
+	}
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Column(length = 280, nullable = false)
-    private String tweet;
+	public Tweet(TweetDTO tweet, User user) {
+		this.text = tweet.text();
+		this.user = user;
+	}
 
-    @ManyToOne
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	@Column(length = 280, nullable = false)
+	private String text;
+
+	@ManyToOne
 	@JoinColumn(name = "USER_ID")
 	private User user;
+
+	public Long getId() {
+		return id;
+	}
+
 }

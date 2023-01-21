@@ -21,21 +21,30 @@ import jakarta.persistence.Table;
 @Table(name = "TB_USER")
 public class User {
 
-    public User (UserDTO user) {
-        this.username = user.username();
-        this.avatar = user.avatar();
-    }
+	public User() {
+		super();
+	}
+	
+	public User(UserDTO user) {
+		this.username = user.username();
+		this.avatar = user.avatar();
+	}
 
-    @Id
-    @Column(name = "USER_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Column(length = 15, nullable = false)
-    private String username;
-    @Column(length = 400, nullable = false)
-    private String avatar;
+	@Id
+	@Column(name = "USER_ID")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	@Column(length = 15, nullable = false, unique = true)
+	private String username;
+	@Column(length = 400, nullable = false)
+	private String avatar;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
 	private List<Tweet> tweets = new ArrayList<>();
+
+	public Long getId() {
+		return id;
+	}
+
 }
