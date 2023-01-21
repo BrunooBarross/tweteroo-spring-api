@@ -11,6 +11,7 @@ import com.api.twetero.models.Tweet;
 import com.api.twetero.models.User;
 import com.api.twetero.repositories.TweetRepository;
 import com.api.twetero.repositories.UserRepository;
+import com.api.twetero.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class TweetService {
@@ -34,13 +35,12 @@ public class TweetService {
         try {
         	User user = userRepository.getReferenceByusername(userName);
             if (user == null) {
-              return null;
+              throw new ResourceNotFoundException("Não foi possível encontrar o usuário " + userName);
             }
         	Tweet obj = new Tweet(req, user);
 			return repository.save(obj);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
+		} catch (NullPointerException e) {
+      throw new ResourceNotFoundException("Não foi possível encontrar o usuário " + userName);
 		}
     }
 }

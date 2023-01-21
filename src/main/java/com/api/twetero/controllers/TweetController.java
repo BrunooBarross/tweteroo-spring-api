@@ -25,6 +25,8 @@ import com.api.twetero.dto.TweetDTO;
 import com.api.twetero.models.Tweet;
 import com.api.twetero.services.TweetService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/api/tweets")
 public class TweetController {
@@ -39,7 +41,7 @@ public class TweetController {
     }
     
     @PostMapping
-    public ResponseEntity<Tweet> insert(@RequestHeader(value = "User") String userName, @RequestBody TweetDTO tweet) {
+    public ResponseEntity<Tweet> insertTweet(@RequestHeader(value = "User") String userName, @RequestBody @Valid TweetDTO tweet) {
     	Tweet obj = service.insertTweet(tweet, userName);
     	URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId())
 				.toUri();
