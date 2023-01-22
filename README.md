@@ -18,7 +18,7 @@
 
 ---
 
-- ➡️ OBS: UTILIZAR O FRONT LOCALIZADO NA PASTA FRONT - tweteroo, arquivo index.html - contém alterações  ⬅️ 
+- ➡️ OBS: UTILIZAR O FRONT LOCALIZADO NA PASTA FRONT - tweteroo, arquivo index.html - contém uma alteração  ⬅️ 
 
 
 ## 👨🏻‍💻 Instalação
