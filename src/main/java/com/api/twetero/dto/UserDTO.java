@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public record UserDTO(
+        @Size(max = 15, message = "username não pode ter mais de 15 caracteres")
         @NotBlank(message = "username não pode ser vazio") 
         String username,
         @NotNull 
